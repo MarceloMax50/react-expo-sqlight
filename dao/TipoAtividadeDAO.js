@@ -2,7 +2,7 @@ import * as SQLite from 'expo-sqlite';
 
 
 export function getDbConnection() {
-    const cx = SQLite.openDatabase('dbContatos.db');
+    const cx = SQLite.openDatabase('dbAtividades.db');
     return cx;
 }
 
@@ -10,11 +10,8 @@ export async function createTable() {
     return new Promise((resolve, reject) => {
         const query = `CREATE TABLE IF NOT EXISTS tbTipoAtividade
         (
-            code text not null primary key,
-            name text not null,
-            phone text not null,
-            email text not null,
-            password text not null          
+            id text not null primary key,
+            name text not null       
         )`;
 
         let dbCx = getDbConnection();
@@ -45,11 +42,8 @@ export function listAll() {
 
                     for (let n = 0; n < registros.rows.length; n++) {
                         let obj = {
-                            code: registros.rows.item(n).code,
+                            id: registros.rows.item(n).id,
                             name: registros.rows.item(n).name,
-                            phone: registros.rows.item(n).phone,
-                            email: registros.rows.item(n).email,
-                            password: registros.rows.item(n).password
                         }
                         retorno.push(obj);
                     }
@@ -65,14 +59,14 @@ export function listAll() {
     );
 }
 
-export function create(contact) {
+export function create(tipoAtividade) {
 
     return new Promise((resolve, reject) => {
-        let query = 'insert into tbTipoAtividade (code, name , phone, email, password) values (?,?,?,?,?)';
+        let query = 'insert into tbTipoAtividade (id, name) values (?,?)';
         let dbCx = getDbConnection();
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, [contact.code, contact.name, contact.phone, contact.email, contact.password],
+            tx.executeSql(query, [tipoAtividade.id, tipoAtividade.name],
                 (tx, resultado) => {
                     resolve(resultado.rowsAffected > 0);
                 })
@@ -86,14 +80,14 @@ export function create(contact) {
     );
 }
 
-export function deleteById(code) {
-    console.log('Apagando contato ' + code);
+export function deleteByName(tipoAtividade) {
+    console.log('Apagando contato ' + tipoAtividade);
     return new Promise((resolve, reject) => {
-        let query = 'delete from tbTipoAtividade where code=?';
+        let query = 'delete from tbTipoAtividade where name=?';
         let dbCx = getDbConnection();
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, [code],
+            tx.executeSql(query, [tipoAtividade],
                 (tx, resultado) => {
                     resolve(resultado.rowsAffected > 0);
                 })
