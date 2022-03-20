@@ -23,7 +23,7 @@ export default function CadastroTipoAtividade({ navigation }) {
         }
         if (refresh) {
             console.log("Recarregando dados...");
-            //await loadData();
+            await load();
         }
     }
     useEffect(
@@ -40,24 +40,36 @@ export default function CadastroTipoAtividade({ navigation }) {
         setRefresh(true);
 
     }
+    async function load() {
+        let contactList = await loadData();
+        setTipos(contactList);
+        setRefresh(true);
+    }
+
+    async function deletar(id) {
+        await deleteOne(id)
+        setRefresh(true);
+    }
     return (
         <View style={styles.container}>
             <ScrollView style={styles.listaTipos}>
                 {
-                    <View style={styles.contato}>
+                    tipos.map((tipo, index) => (
+                        <View style={styles.contato} key={index.toString()}>
 
-                        <View style={styles.dadosListaTipos}>
-                            <Text style={styles.listaNome}>N1</Text>
+                            <View style={styles.dadosListaTipos}>
+                                <Text style={styles.listaNome}>{tipo.name}</Text>
+
+                            </View>
+
+                            <View style={styles.dadosBotoesAcao}>
+                                <TouchableOpacity onPress={() => deletar(tipo.id)}>
+                                    <Ionicons name="md-remove-circle" size={32} color="red" />
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
-
-                        <View style={styles.dadosBotoesAcao}>
-                            <TouchableOpacity >
-                                <Ionicons name="md-remove-circle" size={32} color="red" />
-                            </TouchableOpacity>
-
-                        </View>
-                    </View>
-
+                    ))
                 }
 
             </ScrollView>

@@ -80,16 +80,18 @@ export function create(tipoAtividade) {
     );
 }
 
-export function deleteByName(tipoAtividade) {
-    console.log('Apagando contato ' + tipoAtividade);
+export function deleteById(id) {
     return new Promise((resolve, reject) => {
-        let query = 'delete from tbTipoAtividade where name=?';
+        let query = 'delete from tbTipoAtividade where id=?';
         let dbCx = getDbConnection();
+        console.log(`deletando...id: ${id}`);
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, [tipoAtividade],
+            tx.executeSql(query, [id],
                 (tx, resultado) => {
+                    console.log(resultado);
                     resolve(resultado.rowsAffected > 0);
+
                 })
         },
             error => {
@@ -101,5 +103,29 @@ export function deleteByName(tipoAtividade) {
     );
 }
 
+export function GetByName(name) {
+    return new Promise((resolve, reject) => {
+        let query = 'select * from tbTipoAtividade where name=?';
+        let dbCx = getDbConnection();
+
+        dbCx.transaction(tx => {
+            tx.executeSql(query, [name],
+                (tx, registros) => {
+                    let obj = {
+                        id: registros.rows.item(0).id,
+                        name: registros.rows.item(0).name
+                    }
+                    console.log(obj);
+                    resolve(obj);
+                })
+        },
+            error => {
+                console.log(error);
+                resolve(false);
+            }
+        )
+    }
+    );
+}
 
 

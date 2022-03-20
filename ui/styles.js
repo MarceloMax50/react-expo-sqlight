@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   contato: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#292929',
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: 80,
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     width: '50%',
     fontSize: 18,
     paddingRight: 10,
+    color: '#fff',
   },
   dadosListaTelefone: {
     width: '35%',

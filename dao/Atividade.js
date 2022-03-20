@@ -117,5 +117,24 @@ export function deleteById(id) {
     );
 }
 
+export function GetByName(name) {
+    console.log('Apagando contato ' + id);
+    return new Promise((resolve, reject) => {
+        let query = 'select from tbAtividade where name=?';
+        let dbCx = getDbConnection();
 
+        dbCx.transaction(tx => {
+            tx.executeSql(query, [id],
+                (tx, resultado) => {
+                    resolve(resultado.rowsAffected > 0);
+                })
+        },
+            error => {
+                console.log(error);
+                resolve(false);
+            }
+        )
+    }
+    );
+}
 
