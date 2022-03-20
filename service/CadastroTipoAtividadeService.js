@@ -1,8 +1,13 @@
-
+import {
+    listAll,
+    create,
+    deleteById,
+} from '../dao/TipoAtividadeDAO';
 export async function save(atividade) {
 
     try {
         await create(atividade);
+        console.log(`Atividade ${atividade.name} salva!`)
     }
     catch (err) {
         Alert.alert(`Error alert: ${erro.toString()}`);

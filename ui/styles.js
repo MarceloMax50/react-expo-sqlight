@@ -98,6 +98,17 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center'
   },
+  listaTipos: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#FFF',
+    marginTop: 20,
+    marginBottom: '50%'
+  },
+  dadosListaTipos: {
+    width: '70%',
+    flexDirection: 'row',
+  },
 });
 
 export default styles;

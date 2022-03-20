@@ -1,76 +1,84 @@
 import { react } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
 import styles from '../styles';
-
+import { createTable } from '../../dao/TipoAtividadeDAO';
+import { loadData, save, deleteOne } from '../../service/CadastroTipoAtividadeService';
+import { useState, useEffect } from 'react';
+import TipoAtividade from '../../entities/TipoAtividade';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 export default function CadastroTipoAtividade({ navigation }) {
+    const [name, setName] = useState();
+    const [tipos, setTipos] = useState([]);
+    const [refresh, setRefresh] = useState(true);
+
+    const [shouldCreateTable, setCreateTable] = useState(false);
+
+    async function processEffect() {
+        if (!shouldCreateTable) {
+            console.log("Verificando necessidade de criar tabelas...");
+            setCreateTable(true);
+            await createTable();
+        }
+        if (refresh) {
+            console.log("Recarregando dados...");
+            //await loadData();
+        }
+    }
+    useEffect(
+        () => {
+            console.log('executando useffect');
+            processEffect();
+        }, [refresh]);
+
+    async function create() {
+        let tipoAtividade = new TipoAtividade();
+        tipoAtividade.name = name;
+        tipoAtividade.id = uuidv4();
+        save(tipoAtividade);
+        setRefresh(true);
+
+    }
     return (
         <View style={styles.container}>
+            <ScrollView style={styles.listaTipos}>
+                {
+                    <View style={styles.contato}>
 
+                        <View style={styles.dadosListaTipos}>
+                            <Text style={styles.listaNome}>N1</Text>
+                        </View>
+
+                        <View style={styles.dadosBotoesAcao}>
+                            <TouchableOpacity >
+                                <Ionicons name="md-remove-circle" size={32} color="red" />
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+
+                }
+
+            </ScrollView>
             <View style={styles.areaCadastro}>
 
-                <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>Código</Text>
-                    <TextInput
-                        style={styles.campoEdicao}
-                        //onChangeText={(texto) => setCode(texto)}
-                        value={null}
-                    />
-
-                </View>
                 <View style={styles.area}>
                     <Text style={styles.legendaCadastro}>Nome</Text>
                     <TextInput
                         style={styles.campoEdicao}
-                        // onChangeText={(texto) => setName(texto)}
-                        value={null}
+                        onChangeText={(texto) => setName(texto)}
+                        value={name}
                     />
 
-                </View>
-            </View>
-
-            <View style={styles.areaCadastro}>
-                <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>E-mail</Text>
-                    <TextInput
-                        style={styles.campoEdicao}
-                        // onChangeText={(texto) => setEmail(texto)}
-                        value={null}
-                    />
-
-                </View>
-                <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>Telefone</Text>
-                    <TextInput
-                        style={styles.campoEdicao}
-                        //  onChangeText={(texto) => setPhone(texto)}
-                        value={null}
-                    />
-                </View>
-            </View>
-
-            <View style={styles.areaCadastro}>
-                <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>Senha</Text>
-                    <TextInput
-                        style={styles.campoEdicao}
-                    // onChangeText={(texto) => setPassword(texto)}
-                    //secureTextEntry={true}
-                    // value={null}
-                    />
-
-                </View>
-                <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>Confirmar</Text>
-                    <TextInput
-                        style={styles.campoEdicao}
-                    // onChangeText={(texto) => setConfirmationPass(texto)}
-                    // secureTextEntry={true}
-                    // value={null}
-                    />
                 </View>
             </View>
 
             <View style={styles.areaBotes}>
+                <TouchableOpacity style={styles.botao}
+                    onPress={() => create()}>
+                    <Text>Cadastrar</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.botao}
                     onPress={() => navigation.navigate('Home')}>
                     <Text>Voltar</Text>
