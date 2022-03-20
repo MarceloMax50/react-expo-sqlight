@@ -10,14 +10,6 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-import {
-  createTable,
-  listAll,
-  create,
-  deleteAll,
-  deleteById,
-} from './db/dbservice.js';
-
 const Routes = createAppContainer(
   createSwitchNavigator({
     Home,

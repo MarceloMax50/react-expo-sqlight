@@ -37,7 +37,8 @@ export default function CadastroTipoAtividade({ navigation }) {
         tipoAtividade.name = name;
         tipoAtividade.id = uuidv4();
         save(tipoAtividade);
-        setRefresh(true);
+        sleep(1);
+        load();
 
     }
     async function load() {
@@ -46,9 +47,15 @@ export default function CadastroTipoAtividade({ navigation }) {
         setRefresh(true);
     }
 
-    async function deletar(id) {
-        await deleteOne(id)
-        setRefresh(true);
+    async function deletar(name) {
+        await deleteOne(name)
+        sleep(1);
+        load();
+    }
+
+    function sleep(seconds) {
+        var e = new Date().getTime() + (seconds * 1000);
+        while (new Date().getTime() <= e) { }
     }
     return (
         <View style={styles.container}>
@@ -63,7 +70,7 @@ export default function CadastroTipoAtividade({ navigation }) {
                             </View>
 
                             <View style={styles.dadosBotoesAcao}>
-                                <TouchableOpacity onPress={() => deletar(tipo.id)}>
+                                <TouchableOpacity onPress={() => deletar(tipo.name)}>
                                     <Ionicons name="md-remove-circle" size={32} color="red" />
                                 </TouchableOpacity>
 

@@ -2,21 +2,20 @@ import { Alert } from 'react-native';
 import {
     listAll,
     create,
-    deleteById,
+    deleteByName,
     GetByName
 } from '../dao/TipoAtividadeDAO';
 export async function save(atividade) {
 
     try {
-        if (atividadeExists(atividade.name)) {
-            Alert.alert(`A Atividade com esse nome já existe`);
-        }
-        else {
-            let at = await GetByName(atividade.name);
-            console.log(`Atividade existe: ${at.toString()}`);
-            await create(atividade);
-            console.log(`Atividade ${atividade.name} salva!`);
-        }
+        console.log(atividade);
+        // if (atividadeExists(atividade.name) != false) {
+        //     Alert.alert(`A Atividade com esse nome já existe`);
+        // }
+        // else {
+        await create(atividade);
+        console.log(`Atividade ${atividade.name} salva!`);
+        //}
     }
     catch (err) {
         Alert.alert(`Error alert: ${erro.toString()}`);
@@ -33,12 +32,13 @@ export async function loadData() {
     }
 }
 
-export async function deleteOne(id) {
+export async function deleteOne(name) {
     try {
-        await deleteById(id);
-        console.log(`Atividade ${atividade.name} deletada!`)
+        await deleteByName(name);
+        console.log(`Tipo de Atividade ${name} deletada!`)
     } catch (e) {
-        Alert.alert(JSON.stringify(e));
+        console.log(e);
+        console.log(JSON.stringify(e));
     }
 }
 
@@ -55,8 +55,8 @@ export async function update(atividade) {
 async function atividadeExists(name) {
     let exists = await GetByName(name);
     console.log("avividade exists:" + exists);
-    if (exists) {
-        return true;
+    if (exists === false) {
+        return false;
     }
-    return false;
+    return true;
 }

@@ -47,6 +47,7 @@ export function listAll() {
                         }
                         retorno.push(obj);
                     }
+                    console.log(retorno);
                     resolve(retorno);
                 })
         },
@@ -80,18 +81,15 @@ export function create(tipoAtividade) {
     );
 }
 
-export function deleteById(id) {
+export function deleteByName(name) {
     return new Promise((resolve, reject) => {
-        let query = 'delete from tbTipoAtividade where id=?';
+        let query = 'delete from tbTipoAtividade where name=?';
         let dbCx = getDbConnection();
-        console.log(`deletando...id: ${id}`);
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, [id],
+            tx.executeSql(query, [name],
                 (tx, resultado) => {
-                    console.log(resultado);
                     resolve(resultado.rowsAffected > 0);
-
                 })
         },
             error => {
@@ -111,12 +109,16 @@ export function GetByName(name) {
         dbCx.transaction(tx => {
             tx.executeSql(query, [name],
                 (tx, registros) => {
-                    let obj = {
-                        id: registros.rows.item(0).id,
-                        name: registros.rows.item(0).name
+                    if (registros.rows.length == 0) {
+                        resolve(false);
+                    } else {
+                        let obj = {
+                            id: registros.rows.item(0).id,
+                            name: registros.rows.item(0).name
+                        }
+                        console.log(obj);
+                        resolve(obj);
                     }
-                    console.log(obj);
-                    resolve(obj);
                 })
         },
             error => {

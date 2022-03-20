@@ -110,6 +110,15 @@ const styles = StyleSheet.create({
     width: '70%',
     flexDirection: 'row',
   },
+  picker: {
+    height: 50,
+    width: 150,
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    borderRadius: 5,
+    fontSize: 20,
+    paddingHorizontal: 10,
+  },
 });
 
 export default styles;
