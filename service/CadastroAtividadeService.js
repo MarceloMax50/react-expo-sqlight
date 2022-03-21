@@ -1,11 +1,19 @@
-
+import { Alert } from 'react-native';
+import {
+    listAll,
+    create,
+    deleteById,
+    GetByName,
+    updateStatus
+} from '../dao/AtividadeDAO';
 export async function save(atividade) {
 
     try {
         await create(atividade);
     }
     catch (err) {
-        Alert.alert(`Error alert: ${erro.toString()}`);
+        console.log(err);
+        Alert.alert(`Error alert: ${err.toString()}`);
     }
 }
 
@@ -14,26 +22,25 @@ export async function loadData() {
         let atividadeList = await listAll();
         return atividadeList;
 
-    } catch (e) {
-        Alert.alert(e.toString());
+    } catch (err) {
+        Alert.alert(`Error alert: ${err.toString()}`);
     }
 }
 
 export async function deleteOne(id) {
     try {
         await deleteById(id);
-    } catch (e) {
-        Alert.alert(e);
+    } catch (err) {
+        Alert.alert(`Error alert: ${err.toString()}`);
     }
 }
 
-export async function update(atividade) {
+export async function update(id) {
 
     try {
-        await create(atividade);
-
+        await updateStatus(id);
     }
     catch (err) {
-        Alert.alert(`Error alert: ${erro.toString()}`);
+        Alert.alert(`Error alert: ${err.toString()}`);
     }
 }

@@ -22,7 +22,7 @@ export async function save(atividade) {
     }
 }
 
-export async function loadData() {
+export async function loadType() {
     try {
         let atividadeList = await listAll();
         return atividadeList;

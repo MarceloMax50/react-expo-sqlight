@@ -111,13 +111,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   picker: {
-    height: 50,
-    width: 150,
     backgroundColor: '#fff',
     borderColor: '#fff',
     borderRadius: 5,
     fontSize: 20,
     paddingHorizontal: 10,
+  },
+  cardAtividade: {
+    backgroundColor: '#292929',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 50,
+    alignItems: 'center',
+    margin: 5,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
   },
 });
 

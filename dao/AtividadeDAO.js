@@ -70,18 +70,19 @@ export function listAll() {
 }
 
 export function create(atividade) {
-
+    console.log(atividade);
     return new Promise((resolve, reject) => {
-        let query = 'insert into tbAtividade (id, description , type, deliveryDate, deliveryTime, status) values (?,?,?,?,?,?)';
+        let query = 'insert into tbAtividade (id, description, type, localization, deliveryDate, deliveryTime, status) values (?,?,?,?,?,?,?)';
         let dbCx = getDbConnection();
 
         dbCx.transaction(tx => {
             tx.executeSql(query,
                 [atividade.id,
-                atividade.description,
-                atividade.type,
-                atividade.deliveryDate,
-                atividade.deliveryTime,
+                atividade.descricao,
+                atividade.tipo,
+                atividade.local,
+                atividade.dataEntrega,
+                atividade.horaEntrega,
                 atividade.status],
                 (tx, resultado) => {
                     resolve(resultado.rowsAffected > 0);
@@ -137,3 +138,23 @@ export function GetById(id) {
     );
 }
 
+export function updateStatus(id) {
+    console.log('começando o método alteraContato');
+    return new Promise((resolve, reject) => {
+        let query = 'update tbAtividade set status=Concluído where id=?';
+        let dbCx = getDbConnection();
+
+        dbCx.transaction(tx => {
+            tx.executeSql(query, [id],
+                (tx, resultado) => {
+                    resolve(resultado.rowsAffected > 0);
+                })
+        },
+            error => {
+                console.log(error);
+                resolve(false);
+            }
+        )
+    }
+    );
+}

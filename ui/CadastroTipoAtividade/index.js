@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-nativ
 import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
 import styles from '../styles';
 import { createTable } from '../../dao/TipoAtividadeDAO';
-import { loadData, save, deleteOne } from '../../service/CadastroTipoAtividadeService';
+import { loadType, save, deleteOne } from '../../service/CadastroTipoAtividadeService';
 import { useState, useEffect } from 'react';
 import TipoAtividade from '../../entities/TipoAtividade';
 import 'react-native-get-random-values';
@@ -42,8 +42,8 @@ export default function CadastroTipoAtividade({ navigation }) {
 
     }
     async function load() {
-        let contactList = await loadData();
-        setTipos(contactList);
+        let listaDeTipos = await loadType();
+        setTipos(listaDeTipos);
         setRefresh(true);
     }
 
