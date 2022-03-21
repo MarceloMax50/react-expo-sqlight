@@ -1,12 +1,11 @@
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
 import {
-    Alert, Text, TextInput, TouchableOpacity,
-    View, Keyboard, ScrollView
+    Alert, ScrollView, Text, TouchableOpacity,
+    View
 } from 'react-native';
-import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
+import { deleteOne, loadData, update } from '../../service/CadastroAtividadeService';
 import styles from '../styles';
-import Atividade from '../../entities/Atividade'
-import { useState, useEffect } from 'react';
-import { loadData, deleteOne, update } from '../../service/CadastroAtividadeService';
 
 export default function Home({ navigation }) {
     const [atividades, setAtividades] = useState([]);
@@ -67,47 +66,42 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <ScrollView style={styles.listaTipos}>
+            <ScrollView style={styles.listTypes}>
                 {
                     atividades.map((atividade, index) => (
-                        <View style={styles.cardAtividade} key={index.toString()}>
+                        <View style={styles.cadActivity} key={index.toString()}>
 
-                            <View style={styles.dadosListaTipos}>
-                                <Text style={styles.listaNome}>{atividade.description}</Text>
-                                <View style={styles.dadosListaTipos}>
-                                    <Text style={styles.listaNome}>{atividade.status}</Text>
+                            <View style={styles.dataListTypes}>
+                                <Text style={styles.listName}>{atividade.description}</Text>
+                                <View style={styles.dataListTypes}>
+                                    <Text style={styles.listStatus}>{atividade.status}</Text>
                                     <TouchableOpacity onPress={() => changeStatus(atividade.id)}>
                                         <AntDesign name="retweet" size={32} color="white" />
                                     </TouchableOpacity>
                                 </View>
                             </View>
 
-
-                            <View style={styles.dadosBotoesAcao}>
+                            <View style={styles.btnAction}>
                                 <TouchableOpacity onPress={() => deletar(atividade.id)}>
                                     <Ionicons name="md-remove-circle" size={32} color="red" />
                                 </TouchableOpacity>
-
                             </View>
                         </View>
                     ))
                 }
-
             </ScrollView>
 
-            <View style={styles.areaBotes}>
-                <TouchableOpacity style={styles.botao}
+            <View style={styles.areaBtnHome}>
+                <TouchableOpacity style={styles.btn}
                     onPress={() => navigation.navigate('CadastroAtividade')}>
-                    <Text>Cadastro de atividades</Text>
+                    <Text>Atividades</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.botao}
+                <TouchableOpacity style={styles.btn}
                     onPress={() => navigation.navigate('CadastroTipoAtividade')}>
-                    <Text>Cadastro de tipo de atividade</Text>
+                    <Text>Tipo de Atividade</Text>
                 </TouchableOpacity>
             </View>
         </View>
-
     );
-
 }

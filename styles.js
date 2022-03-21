@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: '10%',
     },
-    areaCadastro: {
+    areaCad: {
         width: '90%',
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -17,25 +17,25 @@ const styles = StyleSheet.create({
     area: {
         width: '45%',
     },
-    campoEdicao: {
+    areaEdit: {
         height: 50,
         backgroundColor: '#fff',
         borderRadius: 5,
         fontSize: 20,
         paddingHorizontal: 10,
     },
-    legendaCadastro: {
+    subCad: {
         fontWeight: 'bold',
         fontSize: 20,
     },
 
-    areaBotes: {
+    areaBtn: {
         marginTop: 30,
         width: '100%',
         justifyContent: 'space-around',
         flexDirection: 'row',
     },
-    botao: {
+    btn: {
         backgroundColor: '#66a5f2',
         borderRadius: 10,
         width: '23%',
@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    listaContatos: {
+    listContact: {
         width: '100%',
         height: '100%',
         backgroundColor: '#FFF',
         marginTop: 20,
     },
-    contato: {
+    contact: {
         backgroundColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -66,32 +66,32 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
         elevation: 3,
     },
-    listaNome: {
+    listName: {
         width: '50%',
         fontSize: 18,
         paddingRight: 10,
     },
-    dadosListaTelefone: {
+    dataListPhone: {
         width: '35%',
         flexDirection: 'row',
     },
-    dadosEmail: {
+    email: {
         width: '50%',
         flexDirection: 'row',
     },
-    dadosBotoesAcao: {
+    btnAction: {
         width: '10%',
     },
-    iconTelefone: {
+    iconPhone: {
         width: 20,
         height: 25,
         marginRight: 5,
     },
-    listaTelefone: {
+    listPhone: {
         color: "#FFF",
         fontSize: 18,
     },
-    tituloAgenda: {
+    titleContact: {
         fontSize: 25,
         color: '#FFF',
         backgroundColor: '#66a5f2',

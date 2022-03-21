@@ -98,7 +98,7 @@ export function create(atividade) {
 }
 
 export function deleteById(id) {
-    console.log('Apagando contato ' + id);
+    console.log('Apagando contact ' + id);
     return new Promise((resolve, reject) => {
         let query = 'delete * from tbAtividade where id=?';
         let dbCx = getDbConnection();
@@ -139,7 +139,7 @@ export function GetById(id) {
 }
 
 export function updateStatus(id) {
-    console.log('começando o método alteraContato');
+    console.log('começando o método alteracontact');
     return new Promise((resolve, reject) => {
         let query = 'update tbAtividade set status=Concluído where id=?';
         let dbCx = getDbConnection();

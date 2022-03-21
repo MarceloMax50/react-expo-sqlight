@@ -1,13 +1,12 @@
-import { react } from 'react';
-import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
-import styles from '../styles';
-import { createTable } from '../../dao/TipoAtividadeDAO';
-import { loadType, save, deleteOne } from '../../service/CadastroTipoAtividadeService';
-import { useState, useEffect } from 'react';
-import TipoAtividade from '../../entities/TipoAtividade';
+import { Ionicons } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import { createTable } from '../../dao/TipoAtividadeDAO';
+import TipoAtividade from '../../entities/TipoAtividade';
+import { deleteOne, loadType, save } from '../../service/CadastroTipoAtividadeService';
+import styles from '../styles';
 export default function CadastroTipoAtividade({ navigation }) {
     const [name, setName] = useState();
     const [tipos, setTipos] = useState([]);
@@ -59,17 +58,17 @@ export default function CadastroTipoAtividade({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.listaTipos}>
+            <ScrollView style={styles.listTypes}>
                 {
                     tipos.map((tipo, index) => (
-                        <View style={styles.contato} key={index.toString()}>
+                        <View style={styles.contact} key={index.toString()}>
 
-                            <View style={styles.dadosListaTipos}>
-                                <Text style={styles.listaNome}>{tipo.name}</Text>
+                            <View style={styles.dataListTypes}>
+                                <Text style={styles.listName}>{tipo.name}</Text>
 
                             </View>
 
-                            <View style={styles.dadosBotoesAcao}>
+                            <View style={styles.btnAction}>
                                 <TouchableOpacity onPress={() => deletar(tipo.name)}>
                                     <Ionicons name="md-remove-circle" size={32} color="red" />
                                 </TouchableOpacity>
@@ -80,25 +79,24 @@ export default function CadastroTipoAtividade({ navigation }) {
                 }
 
             </ScrollView>
-            <View style={styles.areaCadastro}>
 
+            <View style={styles.areaCadType}>
                 <View style={styles.area}>
-                    <Text style={styles.legendaCadastro}>Nome</Text>
+                    <Text style={styles.subCad}>Nome</Text>
                     <TextInput
-                        style={styles.campoEdicao}
+                        style={styles.areaEdit}
                         onChangeText={(texto) => setName(texto)}
                         value={name}
                     />
-
                 </View>
             </View>
 
-            <View style={styles.areaBotes}>
-                <TouchableOpacity style={styles.botao}
+            <View style={styles.areaBtnType}>
+                <TouchableOpacity style={styles.btn}
                     onPress={() => create()}>
                     <Text>Cadastrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.botao}
+                <TouchableOpacity style={styles.btn}
                     onPress={() => navigation.navigate('Home')}>
                     <Text>Voltar</Text>
                 </TouchableOpacity>
