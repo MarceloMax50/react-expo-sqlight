@@ -8,7 +8,7 @@ import { save } from '../../service/CadastroAtividadeService';
 import { loadType } from '../../service/CadastroTipoAtividadeService';
 import styles from '../styles';
 
-export default function CadastroAtividade({ navigation, route }) {
+export default function CadastroAtividade({ navigation }) {
     const [descricao, setDescricao] = useState("");
     const [tipo, setTipo] = useState("");
     const [local, setLocal] = useState("");
@@ -17,10 +17,6 @@ export default function CadastroAtividade({ navigation, route }) {
     const [status, setStatus] = useState("Pendente");
     const [tipos, setTipos] = useState([]);
     const [refresh, setRefresh] = useState(true);
-
-    // let { itemId } = route.params
-    // console.log("itemId");
-    // console.log(itemId);
 
     const [shouldCreateTable, setCreateTable] = useState(false);
 

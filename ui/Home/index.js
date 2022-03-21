@@ -75,6 +75,14 @@ export default function Home({ navigation }) {
         );
     }
 
+    function visualizar(atividade) {
+        Alert.alert(
+            'Visualizar',
+            `Descrição: ${atividade.description} \n`
+            //  Status: ${atividade.status}\n`
+        );
+    }
+
     async function loadTypes() {
         let contactList = [];
         var todos = { id: 'Todos', name: 'Todos' };
@@ -136,13 +144,11 @@ export default function Home({ navigation }) {
                     atividades.map((atividade, index) => (
                         <View style={styles.cadActivity} key={index.toString()}>
 
-                            {/* <View style={styles.btnAction}>
-                                <TouchableOpacity onPress={() => navigation.navigate('CadastroAtividade', {
-                                    atividade
-                                })}>
+                            <View style={styles.btnAction}>
+                                <TouchableOpacity onPress={() => visualizar(atividade)}>
                                     <Ionicons name="eye" size={32} color="gray" />
                                 </TouchableOpacity>
-                            </View> */}
+                            </View>
 
                             <View style={styles.dataListTypes}>
                                 <Text style={styles.listName}>{atividade.description}</Text>
