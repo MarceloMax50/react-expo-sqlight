@@ -18,6 +18,7 @@ export default function Home({ navigation }) {
     const [refresh, setRefresh] = useState(true);
     const [tipo, setTipo] = useState("");
     const [tipos, setTipos] = useState([]);
+    const [status, setStatus] = useState([]);
 
     async function processEffect() {
         if (refresh) {
@@ -34,6 +35,8 @@ export default function Home({ navigation }) {
     async function load() {
         await loadTypes();
         let listaDeAtividades = await loadData();
+        setStatus(["Todos", "Pendente", "Concluído "]);
+        console.log("Status: " + status);
         console.log(listaDeAtividades);
         setAtividades(listaDeAtividades);
         setAtividadesData(listaDeAtividades);
@@ -78,8 +81,11 @@ export default function Home({ navigation }) {
     function visualizar(atividade) {
         Alert.alert(
             'Visualizar',
-            `Descrição: ${atividade.description} \n`
-            //  Status: ${atividade.status}\n`
+            `\n 
+            Descrição: ${atividade.description} \n
+            Local: ${atividade.local} \n
+            Hora de Entrega: ${atividade.deliveryTime} \n
+            Data de Entrega: ${atividade.deliveryDate} \n`
         );
     }
 
@@ -107,7 +113,7 @@ export default function Home({ navigation }) {
         }
     }
 
-    function filter(itemValue) {
+    function filterType(itemValue) {
         console.log('Tipo: ' + itemValue)
         if (itemValue && itemValue != 'Todos') {
             setTipo(itemValue);
@@ -120,6 +126,21 @@ export default function Home({ navigation }) {
         setRefresh(true);
     }
 
+    function filterStatus(itemValue) {
+        console.log('Status: ' + itemValue)
+        if (itemValue && itemValue != 'Todos') {
+            setStatus(itemValue);
+            setAtividades(atividadesData.filter(atividade => atividade.status == itemValue).map(x => x));
+            console.log('Status1: ' + itemValue)
+        }
+        else {
+            setAtividades(atividadesData);
+            console.log('Status2: ' + itemValue)
+        }
+        console.log('Status3: ' + itemValue)
+        setRefresh(true);
+    }
+
     return (
         <View style={styles.container}>
 
@@ -129,7 +150,7 @@ export default function Home({ navigation }) {
                     <Picker
                         selectedValue={tipo}
                         style={styles.areaEdit}
-                        onValueChange={(itemValue, itemIndex) => filter(itemValue)}>
+                        onValueChange={(itemValue, itemIndex) => filterType(itemValue)}>
                         {
                             tipos.map((tipo, index) => (
                                 <Picker.Item label={tipo.name} value={tipo.id} key={tipo.id} />
@@ -137,6 +158,23 @@ export default function Home({ navigation }) {
 
                     </Picker>
                 </View>
+
+            </View>
+            <View style={styles.areaCad}>
+                <View style={styles.areaTypeHome}>
+                    <Text style={styles.subCad}>Status</Text>
+                    <Picker
+                        selectedValue={status}
+                        style={styles.areaEdit}
+                        onValueChange={(itemValue, itemIndex) => filterStatus(itemValue)}>
+
+                        <Picker.Item label="Todos" value="Todos" key="Todos" />
+                        <Picker.Item label="Pendente" value="Pendente" key="Pendente" />
+                        <Picker.Item label="Concluído" value="Concluido" key="Concluído" />
+
+                    </Picker>
+                </View>
+
             </View>
 
             <ScrollView style={styles.listHome}>

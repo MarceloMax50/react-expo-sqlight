@@ -50,6 +50,7 @@ export function listAll() {
                         let obj = {
                             id: registros.rows.item(n).id,
                             description: registros.rows.item(n).description,
+                            local: registros.rows.item(n).localization,
                             type: registros.rows.item(n).type,
                             deliveryDate: registros.rows.item(n).deliveryDate,
                             deliveryTime: registros.rows.item(n).deliveryTime,
