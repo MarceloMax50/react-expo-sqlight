@@ -47,7 +47,7 @@ export default function CadastroAtividade({ navigation }) {
             status);
         console.log(atividade);
         save(atividade);
-
+        navigation.navigate('Home');
     }
 
     async function loadTypes() {

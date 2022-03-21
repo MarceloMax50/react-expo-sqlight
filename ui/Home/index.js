@@ -66,7 +66,7 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <ScrollView style={styles.listTypes}>
+            <ScrollView style={styles.listHome}>
                 {
                     atividades.map((atividade, index) => (
                         <View style={styles.cadActivity} key={index.toString()}>
@@ -75,7 +75,7 @@ export default function Home({ navigation }) {
                                 <Text style={styles.listName}>{atividade.description}</Text>
                                 <View style={styles.dataListTypes}>
                                     <Text style={styles.listStatus}>{atividade.status}</Text>
-                                    <TouchableOpacity onPress={() => changeStatus(atividade.id)}>
+                                    <TouchableOpacity onPress={() => updateStatus(atividade.id)}>
                                         <AntDesign name="retweet" size={32} color="white" />
                                     </TouchableOpacity>
                                 </View>

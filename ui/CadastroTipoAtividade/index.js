@@ -38,7 +38,7 @@ export default function CadastroTipoAtividade({ navigation }) {
         save(tipoAtividade);
         sleep(1);
         load();
-
+        setName('')
     }
     async function load() {
         let listaDeTipos = await loadType();
@@ -103,7 +103,5 @@ export default function CadastroTipoAtividade({ navigation }) {
             </View>
 
         </View>
-
     );
-
 }

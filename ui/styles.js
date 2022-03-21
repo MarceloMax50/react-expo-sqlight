@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   areaCadType: {
-    width: '90%',
+    width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    bottom: 150
+    bottom: 100,
+    paddingTop: 10
   },
   area: {
     width: '45%',
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-around',
     flexDirection: 'row',
+    paddingTop: 10
   },
   areaBtnActivity: {
     marginTop: 70,
@@ -130,13 +132,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     marginTop: 20,
-    marginBottom: '50%'
+    marginBottom: 105,
+    backgroundColor: '#101010'
   },
-  listTypes: {
+  listHome: {
     width: '100%',
     height: '100%',
     marginTop: 20,
-    marginBottom: '50%'
+    backgroundColor: '#101010'
   },
   dataListTypes: {
     width: '70%',
