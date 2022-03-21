@@ -35,6 +35,9 @@ export default function Home({ navigation }) {
     async function updateStatus() {
         await update();
         setRefresh(true);
+        sleep(1);
+        load();
+
     }
 
     async function deletar(id) {
@@ -49,7 +52,7 @@ export default function Home({ navigation }) {
     }
     function changeStatus(id) {
         console.log("Id para atualizar:" + id)
-        if (Alert.alert('Deseja mudar o status da atividade para CONCLUÍDO?',
+        if (Alert.alert('ATUALIZAR STATUS', 'Deseja mudar o status da atividade para CONCLUÍDO?',
             [
                 {
                     text: 'Sim, confirmo!',
