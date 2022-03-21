@@ -170,7 +170,7 @@ export default function Home({ navigation }) {
 
                         <Picker.Item label="Todos" value="Todos" key="Todos" />
                         <Picker.Item label="Pendente" value="Pendente" key="Pendente" />
-                        <Picker.Item label="Concluído" value="Concluido" key="Concluído" />
+                        <Picker.Item label="Concluído" value="Concluído" key="Concluído" />
 
                     </Picker>
                 </View>

@@ -146,7 +146,7 @@ export function updateStatus(id) {
         let dbCx = getDbConnection();
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, ["Concluido", id],
+            tx.executeSql(query, ["Concluído", id],
                 (tx, resultado) => {
                     resolve(resultado.rowsAffected > 0);
                 })
