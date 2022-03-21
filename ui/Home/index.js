@@ -31,9 +31,10 @@ export default function Home({ navigation }) {
         setRefresh(true);
     }
 
-    async function updateStatus() {
-        await update();
-        setRefresh(true);
+    async function updateStatus(id) {
+        await update(id);
+        sleep(1);
+        load();
     }
 
     async function deletar(id) {
@@ -46,21 +47,23 @@ export default function Home({ navigation }) {
         var e = new Date().getTime() + (seconds * 1000);
         while (new Date().getTime() <= e) { }
     }
+
     function changeStatus(id) {
         console.log("Id para atualizar:" + id)
-        if (Alert.alert('Deseja mudar o status da atividade para CONCLUÍDO?',
+        Alert.alert(
+            'Alterando status',
+            'Deseja mudar o status da atividade para CONCLUÍDO?',
             [
                 {
-                    text: 'Sim, confirmo!',
-                    onPress: () => {
-                        updateStatus(id);
-                    }
+                    text: 'Não',
+                    style: 'cancel'
                 },
                 {
-                    text: 'Não!',
-                    style: 'cancel'
+                    text: 'Sim',
+                    onPress: () => updateStatus(id)
                 }
-            ]));
+            ]
+        );
     }
 
     return (
@@ -75,7 +78,7 @@ export default function Home({ navigation }) {
                                 <Text style={styles.listName}>{atividade.description}</Text>
                                 <View style={styles.dataListTypes}>
                                     <Text style={styles.listStatus}>{atividade.status}</Text>
-                                    <TouchableOpacity onPress={() => updateStatus(atividade.id)}>
+                                    <TouchableOpacity onPress={() => changeStatus(atividade.id)}>
                                         <AntDesign name="retweet" size={32} color="white" />
                                     </TouchableOpacity>
                                 </View>

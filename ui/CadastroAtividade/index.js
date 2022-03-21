@@ -8,11 +8,11 @@ import { save } from '../../service/CadastroAtividadeService';
 import { loadType } from '../../service/CadastroTipoAtividadeService';
 import styles from '../styles';
 export default function CadastroAtividade({ navigation }) {
-    const [descricao, setDescricao] = useState();
-    const [tipo, setTipo] = useState();
-    const [local, setLocal] = useState();
-    const [dataEntrega, setData] = useState();
-    const [horaEntrega, setHora] = useState();
+    const [descricao, setDescricao] = useState("");
+    const [tipo, setTipo] = useState("");
+    const [local, setLocal] = useState("");
+    const [dataEntrega, setData] = useState("");
+    const [horaEntrega, setHora] = useState("");
     const [status, setStatus] = useState("Pendente");
     const [tipos, setTipos] = useState([]);
     const [refresh, setRefresh] = useState(true);
