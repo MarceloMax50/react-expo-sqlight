@@ -13,7 +13,7 @@ export async function save(atividade) {
     }
     catch (err) {
         console.log(err);
-        Alert.alert(`Error alert: ${err.toString()}`);
+        Alert.alert("Erro", `Error alert: ${err.toString()}`);
     }
 }
 
@@ -23,7 +23,7 @@ export async function loadData() {
         return atividadeList;
 
     } catch (err) {
-        Alert.alert(`Error alert: ${err.toString()}`);
+        Alert.alert("Erro", `Error alert: ${err.toString()}`);
     }
 }
 
@@ -31,7 +31,7 @@ export async function deleteOne(id) {
     try {
         await deleteById(id);
     } catch (err) {
-        Alert.alert(`Error alert: ${err.toString()}`);
+        Alert.alert("Erro", `Error alert: ${err.toString()}`);
     }
 }
 
@@ -41,6 +41,6 @@ export async function update(id) {
         await updateStatus(id);
     }
     catch (err) {
-        Alert.alert(`Error alert: ${err.toString()}`);
+        Alert.alert("Erro", `Error alert: ${err.toString()}`);
     }
 }

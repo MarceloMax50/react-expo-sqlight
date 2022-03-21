@@ -18,7 +18,7 @@ export async function save(atividade) {
         //}
     }
     catch (err) {
-        Alert.alert(`Error alert: ${erro.toString()}`);
+        Alert.alert("Erro", `Error alert: ${erro.toString()}`);
     }
 }
 
@@ -28,7 +28,7 @@ export async function loadType() {
         return atividadeList;
 
     } catch (e) {
-        Alert.alert(e.toString());
+        Alert.alert("Erro", e.toString());
     }
 }
 
@@ -49,7 +49,7 @@ export async function update(atividade) {
 
     }
     catch (err) {
-        Alert.alert(`Error alert: ${erro.toString()}`);
+        Alert.alert("Erro", `Error alert: ${erro.toString()}`);
     }
 }
 async function atividadeExists(name) {

@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
   area: {
     width: '45%',
   },
+  areaTypeHome: {
+    width: '100%',
+  },
   areaEdit: {
     height: 50,
     backgroundColor: '#292929',
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   listName: {
-    width: '40%',
+    width: '35%',
     fontSize: 18,
     paddingRight: 10,
     color: '#fff',
