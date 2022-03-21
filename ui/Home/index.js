@@ -23,7 +23,6 @@ export default function Home({ navigation }) {
         if (refresh) {
             console.log("Carregando dados...");
             await load();
-            await loadTypes();
         }
     }
     useEffect(
@@ -33,6 +32,7 @@ export default function Home({ navigation }) {
         }, [refresh]);
 
     async function load() {
+        await loadTypes();
         let listaDeAtividades = await loadData();
         console.log(listaDeAtividades);
         setAtividades(listaDeAtividades);
@@ -76,7 +76,15 @@ export default function Home({ navigation }) {
     }
 
     async function loadTypes() {
-        let contactList = await loadType();
+        let contactList = [];
+        var todos = { id: 'Todos', name: 'Todos' };
+        contactList.push(todos);
+
+        let contactListAll = await loadType();
+        contactListAll.forEach(element => {
+            contactList.push(element);
+        });
+
         if (contactList.length > 0) {
             setTipos(contactList);
         }
@@ -93,7 +101,7 @@ export default function Home({ navigation }) {
 
     function filter(itemValue) {
         console.log('Tipo: ' + itemValue)
-        if (itemValue) {
+        if (itemValue && itemValue != 'Todos') {
             setTipo(itemValue);
             setAtividades(atividadesData.filter(atividade => atividade.type == itemValue).map(x => x));
         }
@@ -130,7 +138,7 @@ export default function Home({ navigation }) {
 
                             {/* <View style={styles.btnAction}>
                                 <TouchableOpacity onPress={() => navigation.navigate('CadastroAtividade', {
-                                    itemId: atividade.id,
+                                    atividade
                                 })}>
                                     <Ionicons name="eye" size={32} color="gray" />
                                 </TouchableOpacity>
